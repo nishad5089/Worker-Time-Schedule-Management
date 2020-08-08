@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:User="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/layout.html}">
+<head>
+    <title>Upload Product</title>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <div class="content">
+        <div class="container-fluid">
+<!--            <div class="header text-center">-->
+<!--                <h3 class="title">Weekly Working Report</h3>-->
+<!--            </div>-->
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="card card-calendar">
+                        <div class="card-content">
+                            <div id="fullCalendar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
