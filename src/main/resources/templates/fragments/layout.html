@@ -3,7 +3,7 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<!-- Mirrored from demos.creative-tim.com/material-dashboard-pro/examples/forms/regular.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 20 Mar 2017 21:33:48 GMT -->
+
 <head>
     <meta charset="utf-8" />
     <link rel="apple-touch-icon" sizes="76x76" th:href="@{/img/apple-icon.png}" />
@@ -62,26 +62,19 @@
                 </div>
             </div>
             <ul class="nav">
-<!--                <li th:classappend="${#request.getRequestURI() == '/employee/deshboard' ? 'active' : ''}">-->
-<!--                    <a th:href="@{/}">-->
-<!--                        <i class="material-icons">dashboard</i>-->
-<!--                        <p>Dashboard</p>-->
-<!--                    </a>-->
-<!--                </li>-->
+
                 <li th:classappend="${#request.getRequestURI() == '/employee/' ? 'active' : ''}">
                     <a th:href="@{/employee/}">
                         <i class="material-icons">grid_on</i>
                         <p>Schedule</p>
                     </a>
                 </li>
-                <li th:classappend="${#request.getRequestURI() == '/employee/form' ? 'active' : ''}">
-                    <a th:href="@{/employee/form}">
+                <li th:classappend="${#request.getRequestURI() == '/employee/report' ? 'active' : ''}">
+                    <a th:href="@{/employee/report}">
                         <i class="material-icons">date_range</i>
                         <p>Schedule Report</p>
                     </a>
                 </li>
-
-
 
             </ul>
         </div>
@@ -130,12 +123,6 @@
 
                             </ul>
                         </li>
-<!--                        <li>-->
-<!--                            <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">-->
-<!--                                <i class="material-icons">person</i>-->
-<!--                                <p class="hidden-lg hidden-md">Profile</p>-->
-<!--                            </a>-->
-<!--                        </li>-->
                         <li class="separator hidden-lg hidden-md"></li>
                     </ul>
                     <form class="navbar-form navbar-right" role="search">
@@ -208,7 +195,6 @@
     });
 </script>
 <script>
-    // Add the following code if you want the name of the file appear on select
     $(".custom-file-input").on("change", function() {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);

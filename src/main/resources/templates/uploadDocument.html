@@ -9,24 +9,21 @@
     <title>Upload Product</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/upload-file.css}">
     <script th:inline="javascript">
-        /*<![CDATA[*/
-
-        var message = [[${flag}]]; //Your Thymleaf variable
-        window.onload = function() {
-            if(message === "false"){
-                showNotification('bottom','right','danger',"Invalid Data");
-                return;  // Exit/Return if the variable is false
-            }else if(message === "true"){
-                showNotification('bottom','right','success',"Data Saved Successfully");
+        var message = [[${flag}]];
+        window.onload = function () {
+            if (message === "false") {
+                showNotification('bottom', 'right', 'danger', "Invalid Data");
+                return;
+            } else if (message === "true") {
+                showNotification('bottom', 'right', 'success', "Data Saved Successfully");
             }
-
-
         };
-        function showNotification(from,align,type,message){
+
+        function showNotification(from, align, type, message) {
             $.notify({
                 icon: "notifications",
                 message: message,
-            },{
+            }, {
                 type: type,
                 timer: 2000,
                 placement: {
@@ -35,82 +32,79 @@
                 }
             });
         }
+
         /*]]>*/
     </script>
 </head>
 <body>
 <div layout:fragment="content" th:remove="tag">
-<div class="content">
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-content">
-                    <div class="row">
-                        <div class="col-md-4 col-sm-4">
-                            <legend>Upload Your CSV file</legend>
-<!--                            <div class="custom-file mb-3">-->
-<!--                                <input type="file" class="custom-file-input" id="customFile" name="filename">-->
-<!--                                <label class="custom-file-label" for="customFile">Choose file</label>-->
-<!--                            </div>-->
-<!--                            <div class="mt-3">-->
-<!--                                <button type="submit" class="btn btn-primary">Submit</button>-->
-<!--                            </div>-->
-                            <form action="#" th:action="@{/employee/uploadFile}" th:object="${employeeWorkSchedule}" method="post" enctype="multipart/form-data">
-                                <div class="custom-file mb-3">
-                                    <input type="file" class="custom-file-input" id="customFile" name="filename" th:field="*{file}">
-                                    <label class="custom-file-label" for="customFile">Choose file</label>
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-4">
+                                    <legend>Upload Your CSV file</legend>
+                                    <form action="#" th:action="@{/employee/uploadFile}"
+                                          th:object="${employeeWorkSchedule}" method="post"
+                                          enctype="multipart/form-data">
+                                        <div class="custom-file mb-3">
+                                            <input type="file" class="custom-file-input" id="customFile" name="filename"
+                                                   th:field="*{file}">
+                                            <label class="custom-file-label" for="customFile">Choose file</label>
+                                        </div>
+                                        <div class="mt-3">
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                                    </form>
                                 </div>
-                                <div class="mt-3">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </div>
-                            </form>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- end card -->
+                </div>
+            </div>
+
+            <div class="row" th:if="${msg}">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-icon" data-background-color="rose">
+                            <i class="material-icons">assignment</i>
+                        </div>
+                        <div class="card-content">
+                            <h4 class="card-title" th:text="${msg}"></h4>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class="text-primary">
+                                    <th>Employee Id</th>
+                                    <th>Date</th>
+                                    <th>Name</th>
+                                    <th>Start Time</th>
+                                    <th>End Time</th>
+                                    <th>Shift Name</th>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="employeeSchedule : ${attr}">
+                                        <td th:text="${employeeSchedule.employeeId}"></td>
+                                        <td th:text="${#temporals.format(employeeSchedule.dateAt, 'MM/dd/yyyy')} "></td>
+                                        <td th:text="${employeeSchedule.employeeName}"></td>
+                                        <td th:text="${employeeSchedule.startAt}"></td>
+                                        <td th:text="${employeeSchedule.endAt}"></td>
+                                        <td th:text="${employeeSchedule.shiftName}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
 
                 </div>
             </div>
-            <!-- end card -->
         </div>
     </div>
-
-    <div class="row" th:if="${msg}">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header card-header-icon" data-background-color="rose">
-                    <i class="material-icons">assignment</i>
-                </div>
-                <div class="card-content">
-                    <h4 class="card-title" th:text="${msg}"></h4>
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead class="text-primary">
-                            <th>Employee Id</th>
-                            <th>Date</th>
-                            <th>Name</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
-                            <th>Shift Name</th>
-                            </thead>
-                            <tbody>
-                            <tr th:each="employeeSchedule : ${attr}">
-                                <td  th:text="${employeeSchedule.employeeId}"></td>
-                                <td  th:text="${#temporals.format(employeeSchedule.dateAt, 'MM/dd/yyyy')} "></td>
-                                <td th:text="${employeeSchedule.employeeName}"></td>
-                                <td th:text="${employeeSchedule.startAt}"></td>
-                                <td th:text="${employeeSchedule.endAt}"></td>
-                                <td th:text="${employeeSchedule.shiftName}"></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-</div>
 </div>
 
 </body>

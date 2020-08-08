@@ -58,7 +58,7 @@ public class EmployeeController {
         return "redirect:/employee/";
     }
 
-    @GetMapping("/form")
+    @GetMapping("/report")
     public String form(Model model) {
         model.addAttribute("title","Weekly Working Report");
         return "reportForm";
